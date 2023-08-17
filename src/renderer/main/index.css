@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fallback-title-bar-height: 40px;
+}
+
+body {
+  @apply overflow-hidden;
+}
+
+a.link {
+  @apply truncate text-gray-700 hover:text-black dark:text-gray-300 dark:hover:text-white;
+}
+
+a.link.active {
+  @apply text-indigo-600 font-semibold;
+}
+
+.text-secondary {
+  @apply text-gray-400;
+}
+
+.label {
+  @apply text-gray-400;
+}
+
+.label::after {
+  content: ':';
+  position: relative;
+  top: -0.5px;
+  margin-inline: 2px 8px;
+}
+
+.draggable {
+  app-region: drag;
+  -webkit-app-region: drag;
+}
+
+.nonDraggable {
+  app-region: no-drag;
+  -webkit-app-region: no-drag;
+}
+
+#titleBarContainer {
+  position: fixed;
+  top: env(titlebar-area-y, 0);
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: 100%;
+  cursor: pointer;
+  z-index: 9;
+  box-sizing: content-box;
+}
+
+.dark #titleBarContainer {
+  background-color: #141414;
+}
+
+#titleBar,
+.titleBar {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 100%;
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
+  text-align: center;
+}
+
+.titleBar-left {
+  left: env(titlebar-area-x, 0);
+}
+
+.titleBar-top {
+  top: env(titlebar-area-height, var(--fallback-title-bar-height));
+}
+.titleBar-width {
+  width: env(titlebar-area-width, 100%);
+}
+
+#main {
+  height: calc(100vh - 120px);
+}
+
+.titleBar-ml {
+  margin-left: env(titlebar-area-x, 0);
+}
+.titleBar-mr {
+  margin-right: env(titlebar-area-x, 0);
+}

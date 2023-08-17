@@ -1,0 +1,53 @@
+{
+  "name": "simple-tv",
+  "version": "1.0.0",
+  "description": "simple-tv",
+  "main": "index.js",
+  "scripts": {
+    "publish": "npm run build && electron-builder build -c electron-builder.config.js -p always",
+    "package": "npm run build && electron-builder build -c electron-builder.config.js",
+    "dev": "node scripts/dev.js",
+    "dev:renderer": "vite src/renderer",
+    "build": "node scripts/build.js",
+    "build2": "tsc && vite build",
+    "prebuild": "npm run check",
+    "check": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.json",
+    "test": "vitest",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joey2217/simple-tv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joey2217/simple-tv/issues"
+  },
+  "homepage": "https://github.com/joey2217/simple-tv#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "electron-log": "^4.4.8",
+    "electron-updater": "^6.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "autoprefixer": "^10.4.15",
+    "daisyui": "^3.5.1",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.3",
+    "eslint": "^8.47.0",
+    "eslint-config-react-app": "^7.0.1",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.1"
+  }
+}
