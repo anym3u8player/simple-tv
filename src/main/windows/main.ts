@@ -15,7 +15,7 @@ export function create() {
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#fff',
-      symbolColor: '#a991f7',
+      symbolColor: '#641AE6',
       height: 40,
     },
     webPreferences: {

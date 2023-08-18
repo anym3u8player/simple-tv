@@ -10,29 +10,6 @@ body {
   @apply overflow-hidden;
 }
 
-a.link {
-  @apply truncate text-gray-700 hover:text-black dark:text-gray-300 dark:hover:text-white;
-}
-
-a.link.active {
-  @apply text-indigo-600 font-semibold;
-}
-
-.text-secondary {
-  @apply text-gray-400;
-}
-
-.label {
-  @apply text-gray-400;
-}
-
-.label::after {
-  content: ':';
-  position: relative;
-  top: -0.5px;
-  margin-inline: 2px 8px;
-}
-
 .draggable {
   app-region: drag;
   -webkit-app-region: drag;
@@ -80,7 +57,7 @@ a.link.active {
 }
 
 #main {
-  height: calc(100vh - 120px);
+  height: calc(100vh - var(--fallback-title-bar-height));
 }
 
 .titleBar-ml {
@@ -88,4 +65,23 @@ a.link.active {
 }
 .titleBar-mr {
   margin-right: env(titlebar-area-x, 0);
+}
+
+.link.active {
+  @apply link-primary;
+}
+
+.row {
+  @apply text-base flex mb-1 lg:mb-2;
+}
+
+.info-label {
+  @apply flex-shrink-0;
+}
+
+.info-label::after {
+  content: ':';
+  position: relative;
+  top: -0.5px;
+  margin: 0 8px 0 2px;
 }
