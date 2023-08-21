@@ -85,3 +85,9 @@ body {
   top: -0.5px;
   margin: 0 8px 0 2px;
 }
+
+#ep-list {
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}

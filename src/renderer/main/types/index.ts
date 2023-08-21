@@ -32,3 +32,9 @@ export interface PlayItem {
   url: string
   index: number
 }
+
+export interface VideoRecord extends Video {
+  index: number
+  seek: number
+  date: number
+}

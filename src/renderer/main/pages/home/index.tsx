@@ -13,12 +13,40 @@ const HOT_MOVIE_IDS = [
   // 42076, // 保你平安
   // 31756, // 四海
 ]
+const HOT_TV_IDS = [
+  42772, // 漫长的季节
+  42963, // 平凡之路
+  42475, // 长月烬明
+  41732, // 黑暗荣耀
+  40396, // 狂飙
+  40174, // 重启人生
+]
+const HOT_VARIETY_IDS = [
+  42991, // 乘风2023
+  41054, // 种地吧
+  42767, // 奔跑吧 第七季
+  40529, // 大侦探 第八季
+  42524, // 青春环游记 第四季
+  43111, // 来活了兄弟
+]
+const HOT_CARTOON_IDS = [
+  32742, // 海贼王
+  33346, // 死神 千年血战篇
+  42168, // 画江湖之不良人 第六季
+  32192, // 凡人修仙传
+  42684, // 鬼灭之刃 锻刀村篇
+  32738, // 火影忍者：博人传之次世代继承者
+]
 
 const Home: React.FC = () => {
-
-  return <div>
-    <ChoiceBox ids={HOT_MOVIE_IDS} />
-  </div>
+  return (
+    <div className="h-full overflow-auto">
+      <ChoiceBox ids={HOT_MOVIE_IDS} />
+      <ChoiceBox ids={HOT_TV_IDS} />
+      <ChoiceBox ids={HOT_VARIETY_IDS} />
+      <ChoiceBox ids={HOT_CARTOON_IDS} />
+    </div>
+  )
 }
 
 export default Home

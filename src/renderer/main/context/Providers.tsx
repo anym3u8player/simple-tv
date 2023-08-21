@@ -1,9 +1,13 @@
-import React from 'react'
-import type { PropsWithChildren } from 'react'
+import React, { type PropsWithChildren } from 'react'
 import { ThemeProvider } from './ThemeContext'
+import { VideoRecordProvider } from './VideoRecordContext'
 
 const Providers: React.FC<PropsWithChildren> = ({ children }) => {
-  return <ThemeProvider>{children}</ThemeProvider>
+  return (
+    <ThemeProvider>
+      <VideoRecordProvider>{children}</VideoRecordProvider>
+    </ThemeProvider>
+  )
 }
 
 export default Providers

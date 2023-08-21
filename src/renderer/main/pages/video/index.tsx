@@ -1,28 +1,29 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { fetchVideo } from '../../api'
-import { PlayItem, Video } from '../../types'
+import { PlayItem, VideoRecord } from '../../types'
 import { parseVideoPlayUrl } from '../../utils'
 import Player from '../../components/Player'
 import { HeartIcon } from '../../components/Icons'
 import LiveList from './LiveList'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { useVideoRecord } from '../../context/VideoRecordContext'
 
 const VideoPage: React.FC = () => {
   const { id } = useParams()
-  const [searchParams] = useSearchParams()
 
-  const [index, setIndex] = useState(() => {
-    const ep = searchParams.get('ep')
-    if (ep) {
-      return Number(ep)
-    }
-    return 0
-  })
+  const { records, updateVideoRecord } = useVideoRecord()
+  const [searchParams] = useSearchParams()
+  const [showTab, setShowTab] = useLocalStorage('local_tab', true)
+
+  const [index, setIndex] = useState(0)
 
   const [loading, setLoading] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
 
-  const [current, setCurrent] = useState<Video>()
+  const [current, setCurrent] = useState<VideoRecord | undefined>(() =>
+    records.find((r) => r.vod_id === Number(id))
+  )
 
   const [liveList, setLiveList] = useState<PlayItem[]>([])
 
@@ -41,7 +42,19 @@ const VideoPage: React.FC = () => {
       setLoading(true)
       fetchVideo(id)
         .then((v) => {
-          setCurrent(v)
+          const ep = searchParams.get('ep')
+          let i = 0
+          if (ep) {
+            i = Number(ep)
+          }
+          setIndex(i)
+          setCurrent((r) => ({
+            index: i,
+            seek: 0,
+            date: Date.now(),
+            ...r,
+            ...v,
+          }))
           const { m3u8List } = parseVideoPlayUrl(
             v.vod_play_from,
             v.vod_play_url
@@ -52,7 +65,7 @@ const VideoPage: React.FC = () => {
           setLoading(false)
         })
     }
-  }, [id])
+  }, [id, searchParams])
 
   useEffect(() => {
     if (current) {
@@ -63,25 +76,77 @@ const VideoPage: React.FC = () => {
     }
   }, [current])
 
+  const onEnd = useCallback(() => {
+    const next = index + 1
+    if (current && next < liveList.length) {
+      setIndex(next)
+      const nextData = {
+        ...current,
+        index: next,
+        seek: 0,
+        date: Date.now(),
+      }
+      setCurrent(nextData)
+      updateVideoRecord(nextData)
+    }
+  }, [current, index, liveList.length, updateVideoRecord])
+
+  const onTimeUpdate = useCallback(
+    (seek: number) => {
+      if (current) {
+        updateVideoRecord({ ...current, date: Date.now(), seek })
+      }
+    },
+    [current, updateVideoRecord]
+  )
+
+  if (loading) {
+    return (
+      <div className="text-center">
+        <span className="loading loading-infinity loading-lg"></span>
+      </div>
+    )
+  }
+
   if (current) {
     return (
       <div className="flex h-full">
-        <div className="flex-1">{/* <Player liveUrl={liveUrl} /> */}</div>
-        <div className="w-80 py-4 px-3 rounded-l-lg bg-slate-600 relative overflow-hidden h-full">
+        <div className="flex-1">
+          <Player
+            liveUrl={liveUrl}
+            seek={current.seek}
+            onEnd={onEnd}
+            onTimeUpdate={onTimeUpdate}
+          />
+        </div>
+        <div
+          className={`${
+            showTab ? 'translate-x-full	' : 'translate-x-0'
+          } w-80 py-4 px-3 rounded-l-lg bg-slate-600 relative h-full duration-300 ease-in-out`}
+          style={{
+            transitionProperty: 'transform',
+          }}
+        >
+          <button
+            onClick={() => setShowTab((s) => !s)}
+            className="absolute z-50 top-1/2 translate-y-1/2 -left-6 w-6 bg-gray-500/60 text-4xl p-1 rounded-l-lg"
+          >
+            {showTab ? '❮' : '❯'}
+          </button>
           <div className="flex items-center justify-between  mb-1 lg:mb-2">
             <h3 className="text-primary-content text-2xl font-medium">
               {current.vod_name}
             </h3>
             <HeartIcon />
           </div>
-          <div className=" mb-1 lg:mb-2">
+          <div className="mb-1 lg:mb-2">
             {current.vod_remarks}&nbsp;&nbsp;·&nbsp;&nbsp;
             <button onClick={() => setShowIntro(true)}>简介 ❯</button>
           </div>
           <h5 className="text-xl font-medium text-primary-content mb-1 lg:mb-2">
             剧集
           </h5>
-          <LiveList items={liveList}  onItemClick={setIndex} />
+          <LiveList items={liveList} onItemClick={setIndex} active={index} />
           <div
             className={`absolute top-0 left-0 py-4 px-3 flex flex-col h-full w-full text-primary-content bg-gray-800 ${
               showIntro ? 'block' : 'hidden'
@@ -134,22 +199,13 @@ const VideoPage: React.FC = () => {
               <div className="mb-1 lg:mb-2">{current.vod_actor}</div>
               <div>{current.vod_content}</div>
             </div>
-            LiveList
           </div>
         </div>
       </div>
     )
   }
 
-  if (loading) {
-    return (
-      <div className="text-center">
-        <span className="loading loading-infinity loading-lg"></span>
-      </div>
-    )
-  }
-
-  return <div>暂无数据</div>
+  return <div className="text-center">暂无数据</div>
 }
 
 export default VideoPage

@@ -3,6 +3,8 @@ import Layout from './layout'
 import Error from './pages/error'
 import Home from './pages/home'
 import Video from './pages/video'
+import Channel from './pages/channel'
+import Search from './pages/search'
 
 const router = createHashRouter([
   {
@@ -18,6 +20,16 @@ const router = createHashRouter([
       {
         path: '/v/:id',
         element: <Video />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/channel/:id',
+        element: <Channel />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/search',
+        element: <Search />,
         errorElement: <Error />,
       },
     ],

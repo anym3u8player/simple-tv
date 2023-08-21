@@ -53,9 +53,15 @@ const Header: React.FC = () => {
         >
           ❯
         </button>
-        <nav className="flex items-center gap-2 bg-base-100">
+        <nav className="flex items-center gap-2 lg:gap-4 bg-base-100">
           <NavLink to="/" className="link link-hover">
             精选
+          </NavLink>
+          <NavLink to="/channel/2" className="link link-hover">
+            频道
+          </NavLink>
+          <NavLink to="/search" className="link link-hover">
+            搜索
           </NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
