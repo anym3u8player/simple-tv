@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { fetchVideoList } from '../../api'
 import type { Video } from '../../types'
 import VideoCard from '../../components/VideoCard'
+import Loading from '../../components/Loading'
 
 interface Props {
   ids: number[]
@@ -20,11 +21,7 @@ const ChoiceBox: React.FC<Props> = ({ ids }) => {
   }, [ids])
 
   if (loading) {
-    return (
-      <select className="h-96 flex items-center justify-center">
-        <div className="loading loading-infinity loading-lg"></div>
-      </select>
-    )
+    return <Loading />
   }
 
   return (

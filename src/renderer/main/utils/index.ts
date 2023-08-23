@@ -48,6 +48,41 @@ export function throttle(
   return throttled
 }
 
+export function debounce(func: Function, wait = 500, immediate = true) {
+  let timeout: string | number | NodeJS.Timeout | null | undefined
+  let result: any
+
+  const debounced = function (this: any) {
+    const context = this
+    const args = arguments
+
+    if (timeout) clearTimeout(timeout)
+    if (immediate) {
+      // 如果已经执行过，不再执行
+      const callNow = !timeout
+      timeout = setTimeout(function () {
+        timeout = null
+      }, wait)
+      if (callNow) result = func.apply(context, args)
+    } else {
+      timeout = setTimeout(function () {
+        result = func.apply(context, args)
+      }, wait)
+    }
+    return result
+  }
+
+  // @ts-ignore
+  debounced.cancel = function () {
+    if (timeout) {
+      clearTimeout(timeout)
+      timeout = null
+    }
+  }
+
+  return debounced
+}
+
 const separator = '$$$'
 export function parseVideoPlayUrl(vod_play_from: string, vod_play_url: string) {
   const options = vod_play_from.split(separator)

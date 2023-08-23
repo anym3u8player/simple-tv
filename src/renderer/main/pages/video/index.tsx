@@ -7,12 +7,16 @@ import Player from '../../components/Player'
 import { HeartIcon } from '../../components/Icons'
 import LiveList from './LiveList'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { useVideoRecord } from '../../context/VideoRecordContext'
+import { useVideoRecordStore } from '../../store'
 
 const VideoPage: React.FC = () => {
   const { id } = useParams()
 
-  const { records, updateVideoRecord } = useVideoRecord()
+  const records = useVideoRecordStore((state) => state.records)
+  const updateVideoRecord = useVideoRecordStore(
+    (state) => state.updateVideoRecord
+  )
+
   const [searchParams] = useSearchParams()
   const [showTab, setShowTab] = useLocalStorage('local_tab', true)
 

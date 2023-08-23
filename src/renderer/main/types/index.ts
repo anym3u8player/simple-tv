@@ -27,6 +27,21 @@ export interface Video {
   vod_play_url: string
 }
 
+export interface PageData {
+  list: Video[]
+  total: number
+}
+
+export interface VideoResponse {
+  code: number
+  limit: number
+  list: Video[]
+  msg: string
+  page: number
+  pagecount: number
+  total: number
+}
+
 export interface PlayItem {
   name: string
   url: string
@@ -37,4 +52,11 @@ export interface VideoRecord extends Video {
   index: number
   seek: number
   date: number
+}
+
+export type TypeKey = 'movie' | 'tv' | 'cartoon' | 'variety'
+
+export interface Option<K = string, V = string> {
+  label: K
+  value: V
 }

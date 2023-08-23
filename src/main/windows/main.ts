@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog } from 'electron'
+import { BrowserWindow, dialog, nativeTheme } from 'electron'
 import log from 'electron-log'
 import * as path from 'path'
 import type { OpenDialogOptions } from 'electron'
@@ -7,6 +7,8 @@ let win: BrowserWindow = null!
 
 let quit = false
 
+const DARK_BACK_COLOR = '#1d232a'
+
 export function create() {
   win = new BrowserWindow({
     width: 1200,
@@ -14,7 +16,7 @@ export function create() {
     show: false,
     titleBarStyle: 'hidden',
     titleBarOverlay: {
-      color: '#fff',
+      color: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
       symbolColor: '#641AE6',
       height: 40,
     },

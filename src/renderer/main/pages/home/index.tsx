@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { fetchVideoList } from '../../api'
+import React from 'react'
 import ChoiceBox from './ChoiceBox'
 
 const HOT_MOVIE_IDS = [

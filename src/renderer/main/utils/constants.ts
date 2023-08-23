@@ -1,3 +1,5 @@
+import type { TypeKey, Option } from '../types'
+
 export const BASE_URL = 'https://jyzyapi.com/provide/vod/at/json'
 
 // 热门
@@ -146,3 +148,24 @@ export const CHANNEL_DATA = [
     ],
   },
 ]
+
+export const RESOURCE_TYPES: { [p in TypeKey]: Option[] } = {
+  movie: MOVIE_TYPES,
+  tv: TV_TYPES,
+  cartoon: CARTOON_TYPES,
+  variety: [
+    {
+      label: '综艺',
+      value: '27',
+    },
+  ],
+}
+
+export const CHANNEL_TITLE_MAP: { [p in TypeKey]: string } = {
+  movie: '电影',
+  tv: '电视剧',
+  cartoon: '动漫',
+  variety: '综艺',
+}
+
+export const DEFALUT_TITLE = 'TV'

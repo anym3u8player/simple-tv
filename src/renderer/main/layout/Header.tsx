@@ -57,7 +57,7 @@ const Header: React.FC = () => {
           <NavLink to="/" className="link link-hover">
             精选
           </NavLink>
-          <NavLink to="/channel/2" className="link link-hover">
+          <NavLink to="/channel/14" className="link link-hover">
             频道
           </NavLink>
           <NavLink to="/search" className="link link-hover">

@@ -1,8 +1,13 @@
-import React from 'react'
-import { useTheme } from '../context/ThemeContext'
+import React, { useEffect } from 'react'
+import { useThemeStore, setAppTheme } from '../store/theme'
 
 const ThemeButton: React.FC = () => {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useThemeStore()
+
+  useEffect(() => {
+    setAppTheme(theme)
+  }, [theme])
+
   return (
     <label className="swap swap-rotate">
       {/* this hidden checkbox controls the state */}
