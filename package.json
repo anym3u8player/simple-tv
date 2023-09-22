@@ -1,6 +1,6 @@
 {
   "name": "simple-tv",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "simple-tv",
   "main": "dist/main.js",
   "private": "true",
