@@ -1,11 +1,8 @@
 import { BrowserWindow, dialog, nativeTheme } from 'electron'
-import log from 'electron-log'
 import * as path from 'path'
 import type { OpenDialogOptions } from 'electron'
 
 let win: BrowserWindow = null!
-
-let quit = false
 
 const DARK_BACK_COLOR = '#1d232a'
 
@@ -27,7 +24,9 @@ export function create() {
   })
   win.once('ready-to-show', () => {
     win.show()
-    win.webContents.openDevTools({ mode: 'bottom' })
+    if (import.meta.env.DEV) {
+      win.webContents.openDevTools({ mode: 'bottom' })
+    }
   })
 
   // win.on('close', (e) => {
@@ -66,16 +65,4 @@ export function setMainTitleBarOverlay(
   if (win) {
     win.setTitleBarOverlay(options)
   }
-}
-
-export function musicControl(type: 'prev' | 'play' | 'pause' | 'next') {
-  return () => win.webContents.send('MUSIC_CONTROL', type)
-}
-
-export function beforeQuit() {
-  quit = true
-}
-
-export function mainNavigate(to: string) {
-  send('NAVIGATE', to)
 }

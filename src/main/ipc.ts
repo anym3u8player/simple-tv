@@ -1,8 +1,6 @@
-import { ipcMain,   nativeTheme } from 'electron'
-import {
-  send as sendToMain,
-  setMainTitleBarOverlay,
-} from './windows/main'
+import { ipcMain, nativeTheme, shell } from 'electron'
+import { send as sendToMain, setMainTitleBarOverlay } from './windows/main'
+import { checkForUpdates } from './updater'
 
 export default function handleIPC() {
   nativeTheme.themeSource = 'system'
@@ -14,6 +12,11 @@ export default function handleIPC() {
   ipcMain.handle('SEND_TO_MAIN', (e, channel: string, ...args: any[]) => {
     sendToMain(channel, ...args)
   })
+
+  ipcMain.handle('CHECK_FOR_UPDATE', () => {
+    return checkForUpdates().then((res) => (res ? res.updateInfo.version : ''))
+  })
+
   ipcMain.handle(
     'SET_MAIN_TITLE_BAR_OVERLAY',
     (e, options: Electron.TitleBarOverlayOptions) => {
@@ -22,4 +25,7 @@ export default function handleIPC() {
       }
     }
   )
+  ipcMain.handle('OPEN_EXTERNAL', (_e, url: string) => {
+    return shell.openExternal(url)
+  })
 }

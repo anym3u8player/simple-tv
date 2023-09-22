@@ -1,7 +1,7 @@
 import { autoUpdater } from 'electron-updater'
 import log from 'electron-log'
 import { dialog } from 'electron'
-import { send as sendMain } from './windows/main'
+// import { send as sendMain } from './windows/main'
 
 autoUpdater.autoDownload = false
 
@@ -10,11 +10,11 @@ autoUpdater.on('error', (error) => {
     '更新出错了',
     error == null ? 'unknown' : (error.stack || error).toString()
   )
-  sendMain('VERSION_UPDATE', '更新出错了')
+  // sendMain('VERSION_UPDATE', '更新出错了')
 })
 
 autoUpdater.on('update-available', (info) => {
-  sendMain('VERSION_UPDATE', `检测到新版本 ${info.version}`)
+  // sendMain('VERSION_UPDATE', `检测到新版本 ${info.version}`)
   dialog
     .showMessageBox({
       type: 'info',
@@ -30,7 +30,7 @@ autoUpdater.on('update-available', (info) => {
 })
 
 autoUpdater.on('update-not-available', () => {
-  sendMain('VERSION_UPDATE', '当前版本已经是最新版本')
+  // sendMain('VERSION_UPDATE', '当前版本已经是最新版本')
   dialog.showMessageBox({
     type: 'info',
     title: '暂无更新',
@@ -39,7 +39,7 @@ autoUpdater.on('update-not-available', () => {
 })
 
 autoUpdater.on('update-downloaded', () => {
-  sendMain('VERSION_UPDATE', '更新下载完成')
+  // sendMain('VERSION_UPDATE', '更新下载完成')
   dialog
     .showMessageBox({
       type: 'info',
@@ -49,7 +49,9 @@ autoUpdater.on('update-downloaded', () => {
     })
     .then((res) => {
       if (res.response === 0) {
-        setImmediate(() => autoUpdater.quitAndInstall())
+        setImmediate(() => autoUpdater.quitAndInstall(true, true))
+      } else {
+        autoUpdater.autoInstallOnAppQuit = true
       }
     })
 })
@@ -57,6 +59,7 @@ autoUpdater.on('update-downloaded', () => {
 export function checkForUpdates() {
   log.transports.file.level = 'debug'
   autoUpdater.logger = log
+  log.debug('FeedURL->' + autoUpdater.getFeedURL())
   return autoUpdater.checkForUpdates()
 }
 

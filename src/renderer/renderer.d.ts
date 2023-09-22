@@ -1,12 +1,9 @@
 import Electron from 'electron'
 
 interface IElectronAPI {
-  showItemInFolder: (fullPath: string) => Promise<void>
-  openPath: (fullPath: string) => Promise<void>
-  showOpenDialog: (
-    options: Electron.OpenDialogOptions
-  ) => Promise<Electron.OpenDialogReturnValue>
   setMainTitleBarOverlay: (options: Electron.TitleBarOverlayOptions) => void
+  checkUpdate: () => Promise<string>
+  openExternal: (url: string) => Promise<void>
 }
 
 interface IDevAPI {
@@ -26,7 +23,6 @@ interface IVersions {
     | 'sunos'
     | 'win32'
 }
-
 
 declare global {
   interface Window {

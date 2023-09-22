@@ -1,5 +1,3 @@
-'use client'
-
 import React, { memo, useEffect, useRef } from 'react'
 import Hls from 'hls.js'
 import { throttle } from '../utils'
@@ -183,7 +181,7 @@ const HlsPlayer: React.FC<Props> = ({
       controls
       autoPlay
       tabIndex={-1}
-      className="w-full h-fit outline-none"
+      className="outline-none w-full"
     ></video>
   )
 }

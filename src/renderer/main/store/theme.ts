@@ -49,7 +49,6 @@ const THEME_ATTR = 'data-theme'
 const DARK_BACK_COLOR = '#1d232a'
 
 export function setAppTheme(theme: Theme) {
-  console.log('setAppTheme', theme)
   document.documentElement.setAttribute(THEME_ATTR, theme)
   if (theme === 'dark') {
     window.electronAPI.setMainTitleBarOverlay({ color: DARK_BACK_COLOR })

@@ -1,7 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { version } from '../../../package.json'
-import type { OpenDialogOptions } from 'electron'
-
 /**
  * 不能加载常量,sandbox无法加载
  */
@@ -15,13 +13,10 @@ contextBridge.exposeInMainWorld('devAPI', {
 })
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  showItemInFolder: (fullPath: string) =>
-    ipcRenderer.invoke('SHOW_ITEM_IN_FOLDER', fullPath),
-  openPath: (fullPath: string) => ipcRenderer.invoke('OPEN_PATH', fullPath),
-  showOpenDialog: (options: OpenDialogOptions) =>
-    ipcRenderer.invoke('OPEN_DIALOG', options),
   setMainTitleBarOverlay: (options: Electron.TitleBarOverlayOptions) =>
     ipcRenderer.invoke('SET_MAIN_TITLE_BAR_OVERLAY', options),
+  checkUpdate: () => ipcRenderer.invoke('CHECK_FOR_UPDATE'),
+  openExternal: (url: string) => ipcRenderer.invoke('OPEN_EXTERNAL', url),
 })
 
 contextBridge.exposeInMainWorld('versions', {

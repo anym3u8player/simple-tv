@@ -5,9 +5,9 @@ const nameEN = 'SimpleTV'
  * @see https://www.electron.build/configuration/configuration
  */
 module.exports = {
-  productName: 'SimpleTV',
+  productName: '视界',
   appId: 'com.joey.tv',
-  artifactName: nameEN + '-${version}-${os}-${arch}.${ext}',
+  artifactName: `${nameEN}-\${version}-\${os}-\${arch}.\${ext}`,
   directories: {
     output: 'release',
     buildResources: 'resources',
@@ -45,5 +45,10 @@ module.exports = {
         type: 'file',
       },
     ],
+  },
+  publish: {
+    provider: 'github',
+    // provider: 'generic',
+    // url: 'http://localhost:3000'
   },
 }

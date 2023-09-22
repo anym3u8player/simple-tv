@@ -66,14 +66,11 @@ const Header: React.FC = () => {
           <NavLink to="/live" className="link link-hover">
             直播
           </NavLink>
+          <NavLink to="/about" className="link link-hover">
+            关于
+          </NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
-        <button
-          className="btn btn-sm "
-          onClick={() => window.devAPI.toggleDevtools()}
-        >
-          toggleDevtools
-        </button>
         <ThemeButton />
       </div>
     </header>

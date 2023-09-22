@@ -1,7 +1,6 @@
 import { BrowserWindow, app } from 'electron'
 import { loadDevTools } from './dev'
 import {
-  beforeQuit,
   create as createMainWindow,
   focus as focusMainWindow,
 } from './windows/main'
@@ -37,5 +36,3 @@ app.on('activate', () => {
     focusMainWindow()
   }
 })
-
-app.on('before-quit', beforeQuit)

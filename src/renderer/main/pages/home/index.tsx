@@ -1,5 +1,7 @@
 import React from 'react'
 import ChoiceBox from './ChoiceBox'
+import BannerSwiper from '../../components/BannerSwiper'
+import { HOT } from '../../utils/constants'
 
 const HOT_MOVIE_IDS = [
   44472, //闪电侠
@@ -39,12 +41,15 @@ const HOT_CARTOON_IDS = [
 
 const Home: React.FC = () => {
   return (
-    <div className="page">
-      <ChoiceBox ids={HOT_MOVIE_IDS} />
-      <ChoiceBox ids={HOT_TV_IDS} />
-      <ChoiceBox ids={HOT_VARIETY_IDS} />
-      <ChoiceBox ids={HOT_CARTOON_IDS} />
-    </div>
+    <section className="overflow-auto h-full">
+      <BannerSwiper bannerData={HOT} />
+      <div className="p-2">
+        <ChoiceBox ids={HOT_MOVIE_IDS} />
+        <ChoiceBox ids={HOT_TV_IDS} />
+        <ChoiceBox ids={HOT_VARIETY_IDS} />
+        <ChoiceBox ids={HOT_CARTOON_IDS} />
+      </div>
+    </section>
   )
 }
 

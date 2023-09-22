@@ -8,6 +8,7 @@ import { HeartIcon } from '../../components/Icons'
 import LiveList from './LiveList'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { useVideoRecordStore } from '../../store'
+import { DEFALUT_TITLE } from '../../utils/constants'
 
 const VideoPage: React.FC = () => {
   const { id } = useParams()
@@ -73,10 +74,10 @@ const VideoPage: React.FC = () => {
 
   useEffect(() => {
     if (current) {
-      document.title = current.vod_name
+      document.title = current.vod_name + '-' + DEFALUT_TITLE
     }
     return () => {
-      document.title = 'TV'
+      document.title = DEFALUT_TITLE
     }
   }, [current])
 
@@ -114,15 +115,14 @@ const VideoPage: React.FC = () => {
 
   if (current) {
     return (
-      <div className="flex h-full items-center">
-        <div className="w-full">
-          <div>video</div>
-          {/* <Player
+      <div className="flex items-center h-full dark:bg-black">
+        <div className="overflow-hidden flex-1 h-full flex items-center">
+          <Player
             liveUrl={liveUrl}
             seek={current.seek}
             onEnd={onEnd}
             onTimeUpdate={onTimeUpdate}
-          /> */}
+          />
         </div>
         <div
           className={`${
@@ -139,18 +139,14 @@ const VideoPage: React.FC = () => {
             {showTab ? '❮' : '❯'}
           </button>
           <div className="flex items-center justify-between  mb-1 lg:mb-2">
-            <h3 className="text-2xl font-medium">
-              {current.vod_name}
-            </h3>
+            <h3 className="text-2xl font-medium">{current.vod_name}</h3>
             <HeartIcon />
           </div>
           <div className="mb-1 lg:mb-2">
             {current.vod_remarks}&nbsp;&nbsp;·&nbsp;&nbsp;
             <button onClick={() => setShowIntro(true)}>简介 ❯</button>
           </div>
-          <h5 className="text-xl font-medium mb-1 lg:mb-2">
-            剧集
-          </h5>
+          <h5 className="text-xl font-medium mb-1 lg:mb-2">剧集</h5>
           <LiveList items={liveList} onItemClick={setIndex} active={index} />
           <div
             className={`absolute top-0 left-0 py-4 px-3 flex flex-col h-full w-full text-primary-content bg-base-300 ${

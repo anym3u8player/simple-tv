@@ -10,6 +10,7 @@ import {
 } from '../../components/Icons'
 import Loading from '../../components/Loading'
 import Player from '../../components/Player'
+import { DEFALUT_TITLE } from '../../utils/constants'
 
 type TabKey = 'like' | 'list'
 
@@ -48,11 +49,18 @@ const LivePage: React.FC = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [init])
+
+  useEffect(() => {
+    document.title = `${playChannel.name}-${DEFALUT_TITLE}`
+    return () => {
+      document.title = DEFALUT_TITLE
+    }
+  }, [playChannel.name])
 
   return (
-    <div className="flex h-full items-center dark:bg-black">
-      <div className="w-full pb-10">
+    <div className="flex items-center h-full dark:bg-black">
+      <div className="overflow-hidden flex-1 h-full flex items-center">
         <Player liveUrl={playChannel.url} isLive />
       </div>
       <div

@@ -69,3 +69,10 @@ export interface Channel {
   tvgLogo?: string
   groupTitle: string
 }
+
+export interface Banner {
+  id: number
+  name: string
+  banner: string
+  intro: string
+}

@@ -28,10 +28,6 @@ body {
   box-sizing: content-box;
 }
 
-.dark #titleBarContainer {
-  background-color: #141414;
-}
-
 #titleBar,
 .titleBar {
   position: absolute;
