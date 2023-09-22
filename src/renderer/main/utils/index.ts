@@ -1,3 +1,5 @@
+import type { Channel } from '../types'
+
 const now = Date.now
 
 export function throttle(
@@ -105,4 +107,46 @@ export function parseVideoPlayUrl(vod_play_from: string, vod_play_url: string) {
   return {
     m3u8List,
   }
+}
+function underscoreToCamelCase(str: string) {
+  return str.replace(/-([a-z])/g, function (_match, letter) {
+    return letter.toUpperCase()
+  })
+}
+
+export function parseLiveChannel(m3uStr: string) {
+  const arr1 = m3uStr.split('#EXTINF:-1')
+  const arr2 = arr1.slice(1)
+  const list: Channel[] = []
+  arr2.forEach((data) => {
+    const obj: Channel = {
+      url: '',
+      name: '',
+      groupTitle: '',
+    }
+    const [info, url] = data.split('\n')
+    if (!url) {
+      return
+    }
+    obj.url = url
+    const [info1, name] = info.split(',')
+    obj.name = name
+    const arr3 = info1.split(' ')
+    arr3.forEach((item) => {
+      const [label, value] = item.split('=')
+      if (label && value) {
+        const valueStr = value.replace(/"/g, '')
+        const labelStr = underscoreToCamelCase(label)
+        // @ts-ignore
+        obj[labelStr] = valueStr
+        // if (labelStr === 'tvgLogo') {
+        //   obj[labelStr] = valueStr.replace('https://live.fanmingming.com', '')
+        // } else {
+        //   obj[labelStr] = valueStr
+        // }
+      }
+    })
+    list.push(obj)
+  })
+  return list
 }

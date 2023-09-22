@@ -6,7 +6,7 @@ const Layout: React.FC = () => {
   return (
     <>
       <Header />
-      <main className="mt-10" id="main">
+      <main id="main">
         <Outlet />
       </main>
     </>

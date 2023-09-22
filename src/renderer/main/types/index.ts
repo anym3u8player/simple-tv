@@ -60,3 +60,12 @@ export interface Option<K = string, V = string> {
   label: K
   value: V
 }
+
+export interface Channel {
+  url: string
+  name: string
+  tvgId?: string
+  tvgName?: string
+  tvgLogo?: string
+  groupTitle: string
+}

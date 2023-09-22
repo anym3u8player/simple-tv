@@ -114,31 +114,32 @@ const VideoPage: React.FC = () => {
 
   if (current) {
     return (
-      <div className="flex h-full">
-        <div className="flex-1">
-          <Player
+      <div className="flex h-full items-center">
+        <div className="w-full">
+          <div>video</div>
+          {/* <Player
             liveUrl={liveUrl}
             seek={current.seek}
             onEnd={onEnd}
             onTimeUpdate={onTimeUpdate}
-          />
+          /> */}
         </div>
         <div
           className={`${
-            showTab ? 'translate-x-full	' : 'translate-x-0'
-          } w-80 py-4 px-3 rounded-l-lg bg-slate-600 relative h-full duration-300 ease-in-out`}
+            showTab ? 'w-80 py-4 px-3' : 'w-0 '
+          } relative rounded-l-lg bg-base-300 h-full duration-100 ease-in-out`}
           style={{
-            transitionProperty: 'transform',
+            transitionProperty: 'width',
           }}
         >
           <button
             onClick={() => setShowTab((s) => !s)}
-            className="absolute z-50 top-1/2 translate-y-1/2 -left-6 w-6 bg-gray-500/60 text-4xl p-1 rounded-l-lg"
+            className="absolute z-50 top-1/2 translate-y-1/2 -left-6 w-6 bg-base-300 text-4xl p-1 rounded-l-lg"
           >
             {showTab ? '❮' : '❯'}
           </button>
           <div className="flex items-center justify-between  mb-1 lg:mb-2">
-            <h3 className="text-primary-content text-2xl font-medium">
+            <h3 className="text-2xl font-medium">
               {current.vod_name}
             </h3>
             <HeartIcon />
@@ -147,12 +148,12 @@ const VideoPage: React.FC = () => {
             {current.vod_remarks}&nbsp;&nbsp;·&nbsp;&nbsp;
             <button onClick={() => setShowIntro(true)}>简介 ❯</button>
           </div>
-          <h5 className="text-xl font-medium text-primary-content mb-1 lg:mb-2">
+          <h5 className="text-xl font-medium mb-1 lg:mb-2">
             剧集
           </h5>
           <LiveList items={liveList} onItemClick={setIndex} active={index} />
           <div
-            className={`absolute top-0 left-0 py-4 px-3 flex flex-col h-full w-full text-primary-content bg-gray-800 ${
+            className={`absolute top-0 left-0 py-4 px-3 flex flex-col h-full w-full text-primary-content bg-base-300 ${
               showIntro ? 'block' : 'hidden'
             }`}
           >

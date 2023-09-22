@@ -33,3 +33,142 @@ export function SearchIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function FluentPlay(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 12 12"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M3 2.862a1 1 0 0 1 1.496-.868l5.492 3.138a1 1 0 0 1 0 1.736l-5.492 3.139A1 1 0 0 1 3 9.139V2.862ZM9.492 6L4 2.862v6.277L9.492 6Z"
+      ></path>
+    </svg>
+  )
+}
+
+export function MaterialSymbolsClose(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6L6.4 19Z"
+      ></path>
+    </svg>
+  )
+}
+
+export function PlayIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <rect width="2.8" height="12" x="1" y="6" fill="currentColor">
+        <animate
+          attributeName="y"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.4s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="6;1;6"
+        ></animate>
+        <animate
+          attributeName="height"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.4s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="12;22;12"
+        ></animate>
+      </rect>
+      <rect width="2.8" height="12" x="5.8" y="6" fill="currentColor">
+        <animate
+          attributeName="y"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="6;1;6"
+        ></animate>
+        <animate
+          attributeName="height"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="12;22;12"
+        ></animate>
+      </rect>
+      <rect width="2.8" height="12" x="10.6" y="6" fill="currentColor">
+        <animate
+          id="svgSpinnersBarsScaleMiddle0"
+          attributeName="y"
+          begin="0;svgSpinnersBarsScaleMiddle1.end-0.1s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="6;1;6"
+        ></animate>
+        <animate
+          attributeName="height"
+          begin="0;svgSpinnersBarsScaleMiddle1.end-0.1s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="12;22;12"
+        ></animate>
+      </rect>
+      <rect width="2.8" height="12" x="15.4" y="6" fill="currentColor">
+        <animate
+          attributeName="y"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="6;1;6"
+        ></animate>
+        <animate
+          attributeName="height"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.2s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="12;22;12"
+        ></animate>
+      </rect>
+      <rect width="2.8" height="12" x="20.2" y="6" fill="currentColor">
+        <animate
+          id="svgSpinnersBarsScaleMiddle1"
+          attributeName="y"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.4s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="6;1;6"
+        ></animate>
+        <animate
+          attributeName="height"
+          begin="svgSpinnersBarsScaleMiddle0.begin+0.4s"
+          calcMode="spline"
+          dur="0.6s"
+          keySplines=".14,.73,.34,1;.65,.26,.82,.45"
+          values="12;22;12"
+        ></animate>
+      </rect>
+    </svg>
+  )
+}

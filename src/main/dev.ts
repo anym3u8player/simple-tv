@@ -1,6 +1,6 @@
-const { app, session } = require('electron')
-const path = require('path')
-const os = require('os')
+import { app, session } from 'electron'
+import * as path from 'path'
+import * as os from 'os'
 
 /** @link https://www.electronjs.org/zh/docs/latest/tutorial/devtools-extension */
 export function loadDevTools() {

@@ -19,37 +19,39 @@
     "type": "git",
     "url": "git+https://github.com/joey2217/simple-tv.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "electron"
+  ],
+  "author": "joey",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/joey2217/simple-tv/issues"
   },
   "homepage": "https://github.com/joey2217/simple-tv#readme",
   "dependencies": {
-    "dayjs": "^1.11.9",
+    "dayjs": "^1.11.10",
     "electron-log": "^4.4.8",
-    "electron-updater": "^6.1.1",
-    "hls.js": "^1.4.10",
+    "electron-updater": "^6.1.4",
+    "hls.js": "^1.4.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
+    "react-router-dom": "^6.16.0",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.20",
+    "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "autoprefixer": "^10.4.15",
-    "daisyui": "^3.5.1",
-    "electron": "^26.0.0",
-    "electron-builder": "^24.6.3",
-    "eslint": "^8.47.0",
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^3.7.6",
+    "electron": "^26.2.2",
+    "electron-builder": "^24.6.4",
+    "eslint": "^8.49.0",
     "eslint-config-react-app": "^7.0.1",
-    "postcss": "^8.4.28",
+    "postcss": "^8.4.30",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.2",
     "vite": "^4.4.9",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.4"
   }
 }

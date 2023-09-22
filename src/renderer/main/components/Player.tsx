@@ -6,6 +6,7 @@ import { throttle } from '../utils'
 
 interface Props {
   liveUrl?: string
+  isLive?: boolean
   onEnd?: () => void
   onTimeUpdate?: (seek: number) => void
   seek?: number
@@ -14,7 +15,13 @@ interface Props {
 let hls: Hls
 const SEEK_STEP = 5
 
-const HlsPlayer: React.FC<Props> = ({ liveUrl, seek, onEnd, onTimeUpdate }) => {
+const HlsPlayer: React.FC<Props> = ({
+  liveUrl,
+  seek,
+  onEnd,
+  onTimeUpdate,
+  isLive = false,
+}) => {
   const videoEl = useRef<HTMLVideoElement>(null)
   useEffect(() => {
     try {
@@ -146,7 +153,7 @@ const HlsPlayer: React.FC<Props> = ({ liveUrl, seek, onEnd, onTimeUpdate }) => {
       }
     }
 
-    if (video) {
+    if (video && !isLive) {
       video.addEventListener('timeupdate', timeupdate)
       video.addEventListener('seeked', updateTime)
       video.addEventListener('pause', updateTime)
@@ -157,7 +164,7 @@ const HlsPlayer: React.FC<Props> = ({ liveUrl, seek, onEnd, onTimeUpdate }) => {
       document.addEventListener('keydown', onkeydown)
     }
     return () => {
-      if (video) {
+      if (video && !isLive) {
         video.removeEventListener('timeupdate', timeupdate)
         video.removeEventListener('loadedmetadata', onPlay)
         video.removeEventListener('pause', updateTime)
@@ -168,7 +175,7 @@ const HlsPlayer: React.FC<Props> = ({ liveUrl, seek, onEnd, onTimeUpdate }) => {
         document.removeEventListener('keydown', onkeydown)
       }
     }
-  }, [onEnd, onTimeUpdate, seek])
+  }, [onEnd, onTimeUpdate, seek, isLive])
 
   return (
     <video

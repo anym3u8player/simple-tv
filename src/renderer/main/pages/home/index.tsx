@@ -39,7 +39,7 @@ const HOT_CARTOON_IDS = [
 
 const Home: React.FC = () => {
   return (
-    <div className="h-full overflow-auto">
+    <div className="page">
       <ChoiceBox ids={HOT_MOVIE_IDS} />
       <ChoiceBox ids={HOT_TV_IDS} />
       <ChoiceBox ids={HOT_VARIETY_IDS} />

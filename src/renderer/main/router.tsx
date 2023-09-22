@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Video from './pages/video'
 import Channel from './pages/channel'
 import Search from './pages/search'
+import LivePage from './pages/live'
 
 const router = createHashRouter([
   {
@@ -30,6 +31,11 @@ const router = createHashRouter([
       {
         path: '/search',
         element: <Search />,
+        errorElement: <Error />,
+      },
+      {
+        path: '/live',
+        element: <LivePage />,
         errorElement: <Error />,
       },
     ],
