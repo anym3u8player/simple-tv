@@ -64,7 +64,9 @@ body {
   margin-right: env(titlebar-area-x, 0);
 }
 
-.link.active {
+.link.active,
+a.active
+{
   @apply link-primary;
 }
 
