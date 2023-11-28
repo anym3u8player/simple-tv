@@ -63,9 +63,9 @@ const Header: React.FC = () => {
           <NavLink to="/search" className="link link-hover">
             搜索
           </NavLink>
-          <NavLink to="/live" className="link link-hover">
+          {/* <NavLink to="/live" className="link link-hover">
             直播
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/about" className="link link-hover">
             关于
           </NavLink>

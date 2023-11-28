@@ -4,6 +4,7 @@ import { dialog } from 'electron'
 // import { send as sendMain } from './windows/main'
 
 autoUpdater.autoDownload = false
+autoUpdater.logger = log
 
 autoUpdater.on('error', (error) => {
   dialog.showErrorBox(
@@ -57,8 +58,6 @@ autoUpdater.on('update-downloaded', () => {
 })
 
 export function checkForUpdates() {
-  log.transports.file.level = 'debug'
-  autoUpdater.logger = log
   log.debug('FeedURL->' + autoUpdater.getFeedURL())
   return autoUpdater.checkForUpdates()
 }

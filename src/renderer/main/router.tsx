@@ -35,11 +35,6 @@ const router = createHashRouter([
         errorElement: <Error />,
       },
       {
-        path: '/live',
-        element: <LivePage />,
-        errorElement: <Error />,
-      },
-      {
         path: '/about',
         element: <About />,
         errorElement: <Error />,
