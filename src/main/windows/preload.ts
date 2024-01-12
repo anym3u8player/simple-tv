@@ -17,6 +17,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.invoke('SET_MAIN_TITLE_BAR_OVERLAY', options),
   checkUpdate: () => ipcRenderer.invoke('CHECK_FOR_UPDATE'),
   openExternal: (url: string) => ipcRenderer.invoke('OPEN_EXTERNAL', url),
+  // getArgv: (callback: (e: Electron.IpcRendererEvent, argv: string[]) => void) =>
+  //   ipcRenderer.on('ARGV', callback),
 })
 
 contextBridge.exposeInMainWorld('versions', {

@@ -1,4 +1,3 @@
-/* eslint-disable */
 const now = Date.now
 
 export function throttle(
@@ -6,7 +5,7 @@ export function throttle(
   wait: number = 500,
   options: { leading?: boolean; trailing?: boolean } = {}
 ) {
-  let timeout: number | null | undefined
+  let timeout: string | number | NodeJS.Timeout | null | undefined
   let context: null = null
   let args: IArguments | null = null
   let result: unknown
@@ -50,7 +49,7 @@ export function throttle(
 }
 
 export function debounce(func: Function, wait = 500, immediate = true) {
-  let timeout: number | null | undefined
+  let timeout: string | number | NodeJS.Timeout | null | undefined
   let result: any
 
   const debounced = function (this: any) {

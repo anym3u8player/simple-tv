@@ -1,6 +1,10 @@
 import { BrowserWindow, dialog, nativeTheme } from 'electron'
-import * as path from 'path'
+import * as path from 'node:path'
 import type { OpenDialogOptions } from 'electron'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 let win: BrowserWindow = null!
 
@@ -18,13 +22,14 @@ export function create() {
       height: 40,
     },
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.mjs'),
       webSecurity: import.meta.env.PROD,
+      sandbox: false,
     },
   })
   win.once('ready-to-show', () => {
     win.show()
-    if (import.meta.env.DEV) {
+    if (import.meta.env.DEV || process.argv.includes('--dev')) {
       win.webContents.openDevTools({ mode: 'bottom' })
     }
   })

@@ -4,6 +4,9 @@ interface IElectronAPI {
   setMainTitleBarOverlay: (options: Electron.TitleBarOverlayOptions) => void
   checkUpdate: () => Promise<string>
   openExternal: (url: string) => Promise<void>
+  getArgv: (
+    callback: (e: Electron.IpcRendererEvent, argv: string[]) => void
+  ) => void
 }
 
 interface IDevAPI {
