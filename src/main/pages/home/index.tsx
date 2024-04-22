@@ -42,13 +42,7 @@ const HOT_CARTOON_IDS = [
 const Home: React.FC = () => {
   return (
     <section className="overflow-auto h-full">
-      <BannerSwiper bannerData={HOT} />
-      <div className="p-2">
-        <ChoiceBox ids={HOT_MOVIE_IDS} />
-        <ChoiceBox ids={HOT_TV_IDS} />
-        <ChoiceBox ids={HOT_VARIETY_IDS} />
-        <ChoiceBox ids={HOT_CARTOON_IDS} />
-      </div>
+    
     </section>
   )
 }

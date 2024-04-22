@@ -1,10 +1,11 @@
-/* eslint-disable import/no-anonymous-default-export */
-import daisyui from 'daisyui'
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./src/renderer/**/*.{jsx,tsx,html}'],
+  darkMode: 'class',
+  corePlugins: {
+    preflight: false,
+  },
+  content: ['./src/**/*.{jsx,tsx,html}'],
   theme: {
     extend: {},
   },
-  plugins: [daisyui],
 }

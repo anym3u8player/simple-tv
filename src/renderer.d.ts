@@ -1,12 +1,9 @@
 import Electron from 'electron'
 
 interface IElectronAPI {
-  setMainTitleBarOverlay: (options: Electron.TitleBarOverlayOptions) => void
+  setTheme: (theme: Theme) => Promise<void>
   checkUpdate: () => Promise<string>
   openExternal: (url: string) => Promise<void>
-  getArgv: (
-    callback: (e: Electron.IpcRendererEvent, argv: string[]) => void
-  ) => void
 }
 
 interface IDevAPI {

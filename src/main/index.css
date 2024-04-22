@@ -67,7 +67,7 @@ body {
 .link.active,
 a.active
 {
-  @apply link-primary;
+ 
 }
 
 .row {

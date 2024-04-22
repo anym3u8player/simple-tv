@@ -5,12 +5,14 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "types": ["vite/client"],
+    "types": [
+      "vite/client"
+    ],
     "skipLibCheck": true,
   },
   "include": [
-    "src/renderer/vite.config.ts",
-    "src/main",
-    "package.json"
+    "src-main/**/*",
+    "vite.config.ts",
+    "vite.main.config.ts"
   ]
 }

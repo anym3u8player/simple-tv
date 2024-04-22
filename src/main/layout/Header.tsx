@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ThemeButton from './ThemeButton'
 import { NavLink, useLocation, useNavigate, Location } from 'react-router-dom'
+import ThemeSelect from './ThemeSelect'
 
 interface History {
   length: number
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
           </NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
-        <ThemeButton />
+        <ThemeSelect />
       </div>
     </header>
   )
