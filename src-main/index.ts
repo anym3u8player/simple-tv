@@ -13,27 +13,6 @@ import fsp from 'node:fs/promises'
 
 log.initialize()
 
-// 日志文件设置
-if (import.meta.env.PROD) {
-  log.transports.file.archiveLogFn = (oldLogFile: LogFile) => {
-    const file = oldLogFile.toString()
-    const info = path.parse(file)
-    fsp
-      .rename(
-        file,
-        path.join(info.dir, info.name + new Date().toLocaleString() + info.ext)
-      )
-      .then(() => {
-        log.info(`Log file archived: ${file}`)
-      })
-      .catch((err) => {
-        log.error(err)
-      })
-  }
-  log.transports.file.resolvePathFn = () =>
-    path.join(app.getAppPath(), 'logs/app.log')
-}
-
 const gotTheLock = app.requestSingleInstanceLock()
 
 if (!gotTheLock) {
@@ -66,3 +45,24 @@ app.on('activate', () => {
 })
 
 app.on('before-quit', beforeQuit)
+
+// 日志文件设置
+if (import.meta.env.PROD) {
+  log.transports.file.archiveLogFn = (oldLogFile: LogFile) => {
+    const file = oldLogFile.toString()
+    const info = path.parse(file)
+    fsp
+      .rename(
+        file,
+        path.join(info.dir, info.name + new Date().toLocaleString() + info.ext)
+      )
+      .then(() => {
+        log.info(`Log file archived: ${file}`)
+      })
+      .catch((err) => {
+        log.error(err)
+      })
+  }
+  log.transports.file.resolvePathFn = () =>
+    path.join(app.getAppPath(), 'logs/app.log')
+}

@@ -22,13 +22,18 @@ export default defineConfig({
   root: path.join(__dirname, 'src'),
   base: './',
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.join(__dirname, 'src'),
+    },
+  },
   build: {
     target: `chrome${CHROME_VERSION}`,
     outDir: path.join(__dirname, 'dist/renderer'),
     emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.join(__dirname, 'index.html'),
+        main: path.join(__dirname, 'src/index.html'),
       },
     },
   },

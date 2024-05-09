@@ -10,14 +10,13 @@ interface ThemeState {
 
 const LOCAL_THEME = 'local_theme'
 
+
 export const useThemeStore = create(
   persist<ThemeState>(
     (set) => ({
       theme: 'system',
-      setTheme: (t) => {
-        setAppTheme(t)
-        return set({ theme: t })
-      },
+      setTheme: (t) =>
+        setAppTheme(t).then(() => set({ theme: t })),
     }),
     {
       name: LOCAL_THEME,
@@ -26,16 +25,17 @@ export const useThemeStore = create(
 )
 
 function setAppTheme(theme: Theme) {
-  const root = window.document.documentElement
+  return window.electronAPI.setTheme(theme).then(() => {
+    const root = window.document.documentElement
 
-  root.classList.remove('light', 'dark')
-  let systemTheme = theme
-  if (theme === 'system') {
-    systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light'
-  }
+    root.classList.remove('light', 'dark')
+    let systemTheme = theme
+    if (theme === 'system') {
+      systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    }
 
-  root.classList.add(systemTheme)
-  window.electronAPI.setTheme(theme)
+    root.classList.add(systemTheme)
+  })
 }

@@ -1,18 +1,15 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import Header from './Header';
-
-const { Content, Footer, Sider } = Layout;
+import Header from './Header'
 
 const AppLayout: React.FC = () => {
   return (
-    <Layout>
+    <>
       <Header />
-      <Content id="main">
+      <div id="main" className="p-1 md:p-2 lg:p-4">
         <Outlet />
-      </Content>
-    </Layout>
+      </div>
+    </>
   )
 }
 

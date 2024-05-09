@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename)
 let win: BrowserWindow = null!
 let quit = false
 
-const DARK_BACK_COLOR = '#141414'
+const DARK_BACK_COLOR = '#000000'
 
 export function create() {
   win = new BrowserWindow({
@@ -19,11 +19,11 @@ export function create() {
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
-      symbolColor: '#1890FF',
+      symbolColor: '#f8fafc',
       height: 40,
     },
     webPreferences: {
-      preload: path.join(__dirname, 'preload.mjs'),
+      preload: path.join(__dirname, 'preload.cjs'),
       webSecurity: import.meta.env.PROD,
       sandbox: false,
     },

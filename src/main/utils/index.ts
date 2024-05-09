@@ -1,5 +1,3 @@
-import type { Channel } from '../types'
-
 const now = Date.now
 
 export function throttle(
@@ -83,70 +81,4 @@ export function debounce(func: Function, wait = 500, immediate = true) {
   }
 
   return debounced
-}
-
-const separator = '$$$'
-export function parseVideoPlayUrl(vod_play_from: string, vod_play_url: string) {
-  const options = vod_play_from.split(separator)
-  const blocks = vod_play_url.split(separator).map((item: string) =>
-    item.split('#').map((part: string, index) => {
-      const [name, url] = part.split('$')
-      return { name, url, index }
-    })
-  )
-  let m3u8Index = options.indexOf('jinyingm3u8')
-  if (m3u8Index === -1) {
-    m3u8Index = 0
-  }
-  const m3u8List = blocks[m3u8Index]
-  // let yunIndex = options.indexOf('jinyingyun')
-  // if (yunIndex === -1) {
-  //   yunIndex = 1
-  // }
-  // const yunList = blocks[yunIndex]
-  return {
-    m3u8List,
-  }
-}
-function underscoreToCamelCase(str: string) {
-  return str.replace(/-([a-z])/g, function (_match, letter) {
-    return letter.toUpperCase()
-  })
-}
-
-export function parseLiveChannel(m3uStr: string) {
-  const arr1 = m3uStr.split('#EXTINF:-1')
-  const arr2 = arr1.slice(1)
-  const list: Channel[] = []
-  arr2.forEach((data) => {
-    const obj: Channel = {
-      url: '',
-      name: '',
-      groupTitle: '',
-    }
-    const [info, url] = data.split('\n')
-    if (!url) {
-      return
-    }
-    obj.url = url
-    const [info1, name] = info.split(',')
-    obj.name = name
-    const arr3 = info1.split(' ')
-    arr3.forEach((item) => {
-      const [label, value] = item.split('=')
-      if (label && value) {
-        const valueStr = value.replace(/"/g, '')
-        const labelStr = underscoreToCamelCase(label)
-        // @ts-ignore
-        obj[labelStr] = valueStr
-        // if (labelStr === 'tvgLogo') {
-        //   obj[labelStr] = valueStr.replace('https://live.fanmingming.com', '')
-        // } else {
-        //   obj[labelStr] = valueStr
-        // }
-      }
-    })
-    list.push(obj)
-  })
-  return list
 }

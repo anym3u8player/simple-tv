@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate, Location } from 'react-router-dom'
-import ThemeSelect from './ThemeSelect'
+import ThemeToggle from './ThemeToggle'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 interface History {
   length: number
@@ -28,7 +30,6 @@ const Header: React.FC = () => {
       index: idx,
       location,
     })
-    // console.log(window.history)
   }, [location])
 
   return (
@@ -37,44 +38,32 @@ const Header: React.FC = () => {
       className="w-full border-b border-slate-900/20 dark:border-slate-50/20"
     >
       <div id="titleBar" className="px-2 flex gap-2 items-center">
-        <button
-          className="btn  btn-sm "
+        <Button
           title="后退"
+          size="sm"
+          variant="outline"
           disabled={historyState.index === 0}
           onClick={() => navigate(-1)}
         >
           ❮
-        </button>
-        <button
-          className="btn  btn-sm "
+        </Button>
+        <Button
           title="前进"
+          size="sm"
+          variant="outline"
           disabled={historyState.index === historyState.length - 1}
           onClick={() => navigate(1)}
         >
           ❯
-        </button>
-        <nav className="flex items-center gap-2 lg:gap-4 bg-base-100">
-          <NavLink to="/" className="link link-hover">
-            精选
+        </Button>
+        <nav className="flex items-center gap-1 md:gap-2">
+          <NavLink to="/" className="link">
+            首 页
           </NavLink>
-          <NavLink to="/channel/14" className="link link-hover">
-            频道
-          </NavLink>
-          <NavLink to="/search" className="link link-hover">
-            搜索
-          </NavLink>
-          <NavLink to="/sports" className="link link-hover">
-            体育
-          </NavLink>
-          {/* <NavLink to="/live" className="link link-hover">
-            直播
-          </NavLink> */}
-          <NavLink to="/about" className="link link-hover">
-            关于
-          </NavLink>
+          <NavLink to="/about" className="link">about</NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
-        <ThemeSelect />
+        <ThemeToggle />
       </div>
     </header>
   )
