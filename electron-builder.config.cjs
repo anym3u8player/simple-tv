@@ -48,11 +48,11 @@ module.exports = {
       },
     ],
   },
-  publish: {
-    provider: 'github',
-    // provider: 'generic',
-    // url: 'http://localhost:3000',
-  },
+  // publish: {
+  //   provider: 'github',
+  //   // provider: 'generic',
+  //   // url: 'http://localhost:3000',
+  // },
   releaseInfo: {
     releaseName: `v${version}`,
     releaseNotes: '1. 修复已知问题\n2. 优化用户体验\n',

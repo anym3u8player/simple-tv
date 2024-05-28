@@ -6,7 +6,7 @@ const AppLayout: React.FC = () => {
   return (
     <>
       <Header />
-      <div id="main" className="p-1 md:p-2 lg:p-4">
+      <div id="main" className="scrollbar">
         <Outlet />
       </div>
     </>

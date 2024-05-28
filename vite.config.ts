@@ -34,6 +34,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.join(__dirname, 'src/index.html'),
+        player: path.join(__dirname, 'src/player.html'),
       },
     },
   },

@@ -1,15 +1,10 @@
 import { BrowserWindow, app, dialog, nativeTheme } from 'electron'
 import * as path from 'node:path'
 import type { OpenDialogOptions } from 'electron'
-import { fileURLToPath } from 'node:url'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import { DARK_BACK_COLOR, ROOT } from '../constants'
 
 let win: BrowserWindow = null!
 let quit = false
-
-const DARK_BACK_COLOR = '#000000'
 
 export function create() {
   win = new BrowserWindow({
@@ -23,9 +18,8 @@ export function create() {
       height: 40,
     },
     webPreferences: {
-      preload: path.join(__dirname, 'preload.cjs'),
+      preload: path.join(ROOT, 'main-preload.cjs'),
       webSecurity: import.meta.env.PROD,
-      sandbox: false,
     },
   })
   win.once('ready-to-show', () => {
@@ -39,7 +33,7 @@ export function create() {
     if (!quit) {
       e.preventDefault()
       dialog
-        .showMessageBox(null, {
+        .showMessageBox({
           type: 'question',
           buttons: ['Yes', 'No'],
           title: 'Quit',
@@ -51,7 +45,7 @@ export function create() {
             app.quit()
           }
         })
-        .catch((err) => {
+        .catch(() => {
           /** empty */
         })
     }
@@ -60,7 +54,7 @@ export function create() {
   if (import.meta.env.DEV) {
     win.loadURL('http://localhost:5174')
   } else {
-    win.loadFile(path.join(__dirname, 'renderer/index.html'))
+    win.loadFile(path.join(ROOT, 'renderer/index.html'))
   }
 }
 
@@ -72,7 +66,7 @@ export function focus() {
   }
 }
 
-export function send(channel: string, ...args: any[]) {
+export function send(channel: string, ...args: unknown[]) {
   win.webContents.send(channel, ...args)
 }
 
@@ -81,7 +75,7 @@ export function showOpenDialog(options: OpenDialogOptions) {
 }
 
 export function setMainTitleBarOverlay() {
-  if (win) {
+  if (win && process.platform === 'win32') {
     win.setTitleBarOverlay({
       color: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
     })

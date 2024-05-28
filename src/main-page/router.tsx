@@ -1,8 +1,9 @@
 import { createHashRouter } from 'react-router-dom'
 import Layout from './layout'
-import Error from './layout/Error'
+import Error from '@/components/Error'
 import Home from './pages/home'
-import ChannelLayout from './pages/channel/layout'
+import ChannelLayout, { channelLayoutLoader } from './pages/channel/layout'
+import ChannelPage, { channelLoader } from './pages/channel'
 
 const router = createHashRouter([
   {
@@ -16,9 +17,18 @@ const router = createHashRouter([
         errorElement: <Error />,
       },
       {
-        path: 'channel/:pid',
+        path: 'channel/:channelId',
         element: <ChannelLayout />,
         errorElement: <Error />,
+        loader: channelLayoutLoader,
+        children: [
+          {
+            path: ':categoryId?',
+            loader: channelLoader,
+            element: <ChannelPage />,
+            errorElement: <Error />,
+          },
+        ],
       },
     ],
   },

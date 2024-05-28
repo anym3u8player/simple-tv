@@ -34,7 +34,7 @@ const About: React.FC = () => {
       <div className='flex gap-4 justify-center'>
         <button
           className="btn btn-sm"
-          onClick={() => window.devAPI.toggleDevtools()}
+          onClick={() => window.electronAPI.toggleDevtools()}
         >
           切换开发者工具
         </button>

@@ -8,41 +8,26 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useEffect, useState } from 'react'
+import {
+  type Theme,
+  setLocalTheme,
+  getLocalTheme,
+  addThemeClass,
+} from '@/lib/theme'
 
-type Theme = 'dark' | 'light' | 'system'
-
-const LOCAL_THEME = 'local_theme'
-
-function getTheme(): Theme {
-  const localData = localStorage.getItem(LOCAL_THEME)
-  if (localData != null) {
-    return localData as Theme
-  }
-  return 'system'
-}
-
-function setLocalTheme(theme: Theme) {
-  localStorage.setItem(LOCAL_THEME, theme)
+function setAppTheme(theme: Theme) {
+  setLocalTheme(theme)
   window.electronAPI.setTheme(theme).then(() => {
-    const root = window.document.documentElement
-
-    root.classList.remove('light', 'dark')
-    let systemTheme = theme
-    if (theme === 'system') {
-      systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
-    }
-
-    root.classList.add(systemTheme)
+    addThemeClass(theme)
   })
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(getTheme())
+  const [theme, setTheme] = useState<Theme>(getLocalTheme())
 
   useEffect(() => {
-    setLocalTheme(theme)
+    setAppTheme(theme)
+    console.log('setAppTheme', theme)
   }, [theme])
 
   return (
@@ -56,13 +41,13 @@ export default function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme('light')}>
-          亮色
+          亮 色
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
-          暗色
+          暗 色
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
-          跟随系统
+          系 统
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

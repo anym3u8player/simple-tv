@@ -1,14 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate, Location } from 'react-router-dom'
-import ThemeToggle from './ThemeToggle'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import ThemeToggle from '@/components/ThemeToggle'
+import { Button } from '@/components/ui/button'
 
 interface History {
   length: number
   index: number
   location?: Location
 }
+
+const menus = [
+  {
+    id: 1,
+    name: '电 影',
+  },
+  {
+    id: 2,
+    name: '剧 集',
+  },
+  {
+    id: 39,
+    name: '短 剧',
+  },
+  {
+    id: 4,
+    name: '动 漫',
+  },
+  {
+    id: 3,
+    name: '综 艺',
+  },
+  // {
+  //   id: 40,
+  //   name: '预告',
+  // },
+]
 
 const Header: React.FC = () => {
   const location = useLocation()
@@ -56,11 +82,18 @@ const Header: React.FC = () => {
         >
           ❯
         </Button>
-        <nav className="flex items-center gap-1 md:gap-2">
+        <nav className="flex items-center gap-1 md:gap-3">
           <NavLink to="/" className="link">
             首 页
           </NavLink>
-          <NavLink to="/about" className="link">about</NavLink>
+          {menus.map((m) => (
+            <NavLink key={m.id} to={`/channel/${m.id}`} className="link">
+              {m.name}
+            </NavLink>
+          ))}
+          {/* <NavLink to="/about" className="link">
+            about
+          </NavLink> */}
         </nav>
         <div className="flex-1 h-full draggable"></div>
         <ThemeToggle />

@@ -1,3 +1,4 @@
+/* eslint-disable   */
 const now = Date.now
 
 export function throttle(

@@ -21,10 +21,11 @@ export default defineConfig(({ mode }) => {
       target: `node${NODE_VERSION}`,
       outDir: path.join(ROOT, 'dist'),
       emptyOutDir: true,
-      minify: mode === 'development' ? false : 'esbuild',
+      minify: 'esbuild',
       lib: {
         entry: {
-          preload: path.join(ROOT, '/src-main/preload/preload.ts'),
+          'main-preload': path.join(ROOT, '/src-main/preload/main.ts'),
+          'player-preload': path.join(ROOT, '/src-main/preload/player.ts'),
         },
         formats: ['cjs'],
         fileName: (_format, entryName) => entryName + '.cjs',

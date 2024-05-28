@@ -4,10 +4,8 @@ interface IElectronAPI {
   setTheme: (theme: Theme) => Promise<void>
   checkUpdate: () => Promise<string>
   openExternal: (url: string) => Promise<void>
-}
-
-interface IDevAPI {
   toggleDevtools: () => Promise<void>
+  playVideo: (id: number) => Promise<void>
 }
 interface IVersions {
   node: string
@@ -27,7 +25,6 @@ interface IVersions {
 declare global {
   interface Window {
     electronAPI: IElectronAPI
-    devAPI: IDevAPI
     versions: IVersions
   }
 }
