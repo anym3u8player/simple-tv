@@ -86,14 +86,15 @@ const Header: React.FC = () => {
           <NavLink to="/" className="link">
             首 页
           </NavLink>
+
           {menus.map((m) => (
             <NavLink key={m.id} to={`/channel/${m.id}`} className="link">
               {m.name}
             </NavLink>
           ))}
-          {/* <NavLink to="/about" className="link">
-            about
-          </NavLink> */}
+          <NavLink to="/about" className="link">
+            关 于
+          </NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
         <ThemeToggle />

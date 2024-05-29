@@ -4,6 +4,7 @@ import Error from '@/components/Error'
 import Home, { homeLoader } from './pages/home'
 import ChannelLayout, { channelLayoutLoader } from './pages/channel/layout'
 import ChannelPage, { channelLoader } from './pages/channel'
+import About from './pages/about'
 
 const router = createHashRouter([
   {
@@ -30,6 +31,10 @@ const router = createHashRouter([
             errorElement: <Error />,
           },
         ],
+      },
+      {
+        path: 'about',
+        element: <About />,
       },
     ],
   },
