@@ -1,6 +1,6 @@
 {
   "name": "simple-tv",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "看电视",
   "main": "dist/main.mjs",
   "type": "module",
