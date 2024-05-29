@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, useNavigate, Location } from 'react-router-dom'
 import ThemeToggle from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
+import SearchBar from './SearchBar'
 
 interface History {
   length: number
@@ -97,6 +98,7 @@ const Header: React.FC = () => {
           </NavLink>
         </nav>
         <div className="flex-1 h-full draggable"></div>
+        <SearchBar />
         <ThemeToggle />
       </div>
     </header>

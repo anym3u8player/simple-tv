@@ -9,8 +9,28 @@
   <title>视界</title>
 </head>
 
+<style>
+  @media (prefers-color-scheme: dark) {
+    html {
+      color-scheme: dark;
+      background-color: #000;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    html {
+      color-scheme: light;
+      background-color: #fff;
+    }
+  }
+</style>
+
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <div>
+      <h1>加载中...</h1>
+    </div>
+  </div>
   <script type="module" src="./main-page/main.tsx"></script>
 </body>
 

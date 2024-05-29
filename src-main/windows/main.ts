@@ -12,9 +12,10 @@ export function create() {
     height: 800,
     show: false,
     titleBarStyle: 'hidden',
+    backgroundColor: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
     titleBarOverlay: {
       color: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
-      symbolColor: '#f8fafc',
+      symbolColor: nativeTheme.shouldUseDarkColors ? '#fff' : '#000',
       height: 40,
     },
     webPreferences: {
@@ -78,6 +79,7 @@ export function setMainTitleBarOverlay() {
   if (win && process.platform === 'win32') {
     win.setTitleBarOverlay({
       color: nativeTheme.shouldUseDarkColors ? DARK_BACK_COLOR : '#fff',
+      symbolColor: nativeTheme.shouldUseDarkColors ? '#fff' : '#000',
     })
   }
 }

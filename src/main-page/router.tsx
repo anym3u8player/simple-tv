@@ -5,6 +5,7 @@ import Home, { homeLoader } from './pages/home'
 import ChannelLayout, { channelLayoutLoader } from './pages/channel/layout'
 import ChannelPage, { channelLoader } from './pages/channel'
 import About from './pages/about'
+import Search, { searchLoader } from './pages/search'
 
 const router = createHashRouter([
   {
@@ -35,6 +36,11 @@ const router = createHashRouter([
       {
         path: 'about',
         element: <About />,
+      },
+      {
+        path: 'search',
+        loader: searchLoader,
+        element: <Search />,
       },
     ],
   },

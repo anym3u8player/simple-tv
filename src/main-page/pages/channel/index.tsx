@@ -1,5 +1,5 @@
 import { BASE_URL } from '@/lib/constants'
-import Pagination from '@/main-page/components/Pagination'
+import Pagination from '@/components/Pagination'
 import VideoCard from '@/main-page/components/VideoCard'
 import { VideoList } from '@/types'
 import React from 'react'
