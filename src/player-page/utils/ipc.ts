@@ -6,7 +6,7 @@ export function useIPC() {
     const theme = getLocalTheme()
     addThemeClass(theme)
 
-    const removeListener = window.messageAPI.onThemeChange(() => {
+    const removeListener = window.playerMessageAPI.onThemeChange(() => {
       const theme = getLocalTheme()
       addThemeClass(theme)
     })

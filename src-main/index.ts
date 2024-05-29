@@ -5,7 +5,7 @@ import {
   create as createMainWindow,
   focus as focusMainWindow,
 } from './windows/main'
-import { create as createPlayerWindow } from './windows/player'
+import { beforeAppQuit, create as createPlayerWindow } from './windows/player'
 import handleIPC from './ipc'
 import log from 'electron-log/main'
 import path from 'node:path'
@@ -46,7 +46,10 @@ app.on('activate', () => {
   }
 })
 
-app.on('before-quit', beforeQuit)
+app.on('before-quit', () => {
+  beforeQuit()
+  beforeAppQuit()
+})
 
 // 日志文件设置
 if (import.meta.env.PROD) {

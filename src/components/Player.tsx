@@ -176,7 +176,7 @@ const HlsPlayer: React.FC<Props> = ({
   }, [onEnd, onTimeUpdate, seek, isLive])
 
   if (import.meta.env.DEV) {
-    return null
+    return <div>{liveUrl}</div>
   }
 
   return (

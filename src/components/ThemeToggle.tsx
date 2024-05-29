@@ -27,7 +27,6 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     setAppTheme(theme)
-    console.log('setAppTheme', theme)
   }, [theme])
 
   return (

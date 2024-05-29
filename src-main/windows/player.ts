@@ -3,6 +3,7 @@ import * as path from 'node:path'
 import { DARK_BACK_COLOR, ROOT } from '../constants'
 
 let win: BrowserWindow = null!
+let quit = false
 
 export function create() {
   win = new BrowserWindow({
@@ -27,14 +28,16 @@ export function create() {
   })
 
   win.on('close', (e) => {
-    e.preventDefault()
-    win.hide()
+    if (!quit) {
+      e.preventDefault()
+      win.hide()
+    }
   })
 
   if (import.meta.env.DEV) {
     win.loadURL('http://localhost:5174/player')
   } else {
-    win.loadFile(path.join(__dirname, 'renderer/player.html'))
+    win.loadFile(path.join(ROOT, 'renderer/player.html'))
   }
 }
 
@@ -56,4 +59,12 @@ export function focusPlayer() {
     win.show()
     win.focus()
   }
+}
+
+export function setPlayerAlwaysOnTop(flag: boolean) {
+  win.setAlwaysOnTop(flag)
+}
+
+export function beforeAppQuit() {
+  quit = true
 }

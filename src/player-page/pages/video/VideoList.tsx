@@ -1,15 +1,24 @@
 import { Button } from '@/components/ui/button'
-import { Addr } from '@/types'
+import type { Addr } from '@/types'
 import React, { useMemo } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-interface Props {
-  addrList: Addr[]
-}
+import { useVideoPlayer } from './VideoPlayerContext'
 
 const SIZE = 120
 
-const VideoList: React.FC<Props> = ({ addrList }) => {
+const VideoList: React.FC = () => {
+  const {
+    videoInfo,
+    playLineIndex,
+    setPlayUrl,
+    playUrl,
+    addrTabIndex,
+    setAddrTabIndex,
+    setEp,
+  } = useVideoPlayer()
+
+  const addrList = videoInfo.playLines[playLineIndex].addr
+
   const tabs = useMemo(() => {
     if (addrList.length < SIZE) {
       return []
@@ -26,11 +35,21 @@ const VideoList: React.FC<Props> = ({ addrList }) => {
     }))
   }, [addrList])
 
+  const onClickEp = (addr: Addr, i: number) => {
+    setEp(i)
+    setPlayUrl(addr.url)
+  }
+
   if (addrList.length < SIZE) {
     return (
       <div className="grid gap-2 grid-cols-4">
         {addrList.map((item, i) => (
-          <Button key={item.sort} variant={i === 1 ? 'default' : 'ghost'}>
+          <Button
+            key={item.sort}
+            variant={item.url === playUrl ? 'default' : 'ghost'}
+            onClick={() => onClickEp(item, i)}
+            className="truncate"
+          >
             {item.name}
           </Button>
         ))}
@@ -39,7 +58,7 @@ const VideoList: React.FC<Props> = ({ addrList }) => {
   }
 
   return (
-    <Tabs defaultValue={' '}>
+    <Tabs value={addrTabIndex} onValueChange={setAddrTabIndex}>
       <TabsList className="flex-wrap">
         {tabs.map((t) => (
           <TabsTrigger value={t.sort} key={t.sort}>
@@ -53,9 +72,10 @@ const VideoList: React.FC<Props> = ({ addrList }) => {
             {t.items.map((item, i) => (
               <Button
                 key={item.sort}
-                variant={t.index * SIZE + i === 1 ? 'default' : 'ghost'}
+                variant={item.url === playUrl ? 'default' : 'ghost'}
+                onClick={() => onClickEp(item, t.index * SIZE + i)}
+                className="truncate"
               >
-                {/* <Link href={`/v/${vid}/${t.index * SIZE + i}`}> */}
                 {item.name}
               </Button>
             ))}

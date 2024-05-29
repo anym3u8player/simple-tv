@@ -1,17 +1,20 @@
 import Electron from 'electron'
 
-interface IElectronAPI {}
+interface ElectronAPI {
+  toggleDevtools: () => Promise<void>
+  setPlayerAlwaysOnTop: (alwaysOnTop: boolean) => Promise<void>
+}
 
 type RemoveListener = () => void
 
-interface IMessageAPI {
+interface MessageAPI {
   onThemeChange: (callback: () => void) => RemoveListener
   onPlayVideo: (callback: (id: number) => void) => RemoveListener
 }
 
 declare global {
   interface Window {
-    electronAPI: IElectronAPI
-    messageAPI: IMessageAPI
+    playerElectronAPI: ElectronAPI
+    playerMessageAPI: MessageAPI
   }
 }

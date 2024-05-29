@@ -1,7 +1,7 @@
 import { createHashRouter } from 'react-router-dom'
 import Layout from './layout'
 import Error from '@/components/Error'
-import Home from './pages/home'
+import Home, { homeLoader } from './pages/home'
 import ChannelLayout, { channelLayoutLoader } from './pages/channel/layout'
 import ChannelPage, { channelLoader } from './pages/channel'
 
@@ -14,6 +14,7 @@ const router = createHashRouter([
       {
         index: true,
         element: <Home />,
+        loader: homeLoader,
         errorElement: <Error />,
       },
       {

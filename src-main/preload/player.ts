@@ -1,7 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
-contextBridge.exposeInMainWorld('electronAPI', {
+contextBridge.exposeInMainWorld('playerElectronAPI', {
   toggleDevtools: () => ipcRenderer.invoke('TOGGLE_DEVTOOLS'),
+  setPlayerAlwaysOnTop: (alwaysOnTop: boolean) =>
+    ipcRenderer.invoke('SET_PLAYER_ALWAYS_ON_TOP', alwaysOnTop),
 })
 
 function addListener(channel: string, callback: (...args: unknown[]) => void) {
@@ -11,7 +13,7 @@ function addListener(channel: string, callback: (...args: unknown[]) => void) {
   return () => ipcRenderer.off(channel, listener)
 }
 
-contextBridge.exposeInMainWorld('messageAPI', {
+contextBridge.exposeInMainWorld('playerMessageAPI', {
   onThemeChange: (callback: () => void) =>
     addListener('ON_THEME_CHANGE', callback),
   onPlayVideo: (callback: (id: number) => void) =>

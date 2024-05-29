@@ -1,4 +1,5 @@
-/* eslint-disable   */
+/* eslint-disable */
+// https://underscorejs.org/
 const now = Date.now
 
 export function throttle(

@@ -6,7 +6,7 @@ const AppLayout: React.FC = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const removeListener = window.messageAPI.onPlayVideo((id) => {
+    const removeListener = window.playerMessageAPI.onPlayVideo((id) => {
       console.log('onPlayVideo', id)
       navigate(`/video/${id}`)
     })

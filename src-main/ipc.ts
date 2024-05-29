@@ -6,6 +6,7 @@ import {
   setPlayerTitleBarOverlay,
   sendToPlayer,
   focusPlayer,
+  setPlayerAlwaysOnTop,
 } from './windows/player'
 
 export default function handleIPC() {
@@ -31,5 +32,9 @@ export default function handleIPC() {
   ipcMain.handle('PLAY_VIDEO', (_e, id: number) => {
     focusPlayer()
     sendToPlayer('ON_PLAY_VIDEO', id)
+  })
+
+  ipcMain.handle('SET_PLAYER_ALWAYS_ON_TOP', (_e, alwaysOnTop: boolean) => {
+    setPlayerAlwaysOnTop(alwaysOnTop)
   })
 }

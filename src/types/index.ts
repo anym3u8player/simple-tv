@@ -93,7 +93,7 @@ export interface Addr {
   subTitle: string
 }
 
-interface PlayLine {
+export interface PlayLine {
   id: number
   name: string
   sort: number
@@ -163,7 +163,7 @@ interface Info {
   lines: Line[]
 }
 
-interface VideoInfo {
+export interface VideoInfo {
   id: number
   name: string
   alias: string

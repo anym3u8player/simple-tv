@@ -35,9 +35,9 @@ export function create() {
       dialog
         .showMessageBox({
           type: 'question',
-          buttons: ['Yes', 'No'],
-          title: 'Quit',
-          message: 'Do you want to quit?',
+          buttons: ['是', '否'],
+          title: '退出',
+          message: '确定退出?',
         })
         .then((res) => {
           if (res.response === 0) {

@@ -39,7 +39,10 @@ const ChannelLayout: React.FC = () => {
         <Carousel className="w-full" opts={{ loop: true }}>
           <CarouselContent>
             {banners.map((b) => (
-              <CarouselItem key={b.id}>
+              <CarouselItem
+                key={b.id}
+                onClick={() => window.electronAPI.playVideo(b.id)}
+              >
                 <div className="h-96 w-screen relative" title={b.title}>
                   <LazyImage
                     src={

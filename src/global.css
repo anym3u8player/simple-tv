@@ -79,6 +79,10 @@
   --fallback-title-bar-height: 40px;
 }
 
+html {
+  color-scheme: light dark;
+}
+
 .draggable {
   -webkit-app-region: drag;
 }
