@@ -37,4 +37,9 @@ export default function handleIPC() {
   ipcMain.handle('SET_PLAYER_ALWAYS_ON_TOP', (_e, alwaysOnTop: boolean) => {
     setPlayerAlwaysOnTop(alwaysOnTop)
   })
+
+  ipcMain.handle('PLAY_SPORT_LIVE', (_e, id: number, type: number) => {
+    focusPlayer()
+    sendToPlayer('ON_PLAY_SPORT_LIVE', id, type)
+  })
 }

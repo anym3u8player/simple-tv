@@ -6,6 +6,7 @@ interface IElectronAPI {
   openExternal: (url: string) => Promise<void>
   toggleDevtools: () => Promise<void>
   playVideo: (id: number) => Promise<void>
+  playSportLive: (id: number, type: number) => Promise<void>
 }
 interface IVersions {
   node: string

@@ -8,6 +8,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
   openExternal: (url: string) => ipcRenderer.invoke('OPEN_EXTERNAL', url),
   toggleDevtools: () => ipcRenderer.invoke('TOGGLE_DEVTOOLS'),
   playVideo: (id: number) => ipcRenderer.invoke('PLAY_VIDEO', id),
+  playSportLive: (id: number, type: number) =>
+    ipcRenderer.invoke('PLAY_SPORT_LIVE', id, type),
 })
 
 // function addListener(channel: string, callback: (...args: unknown[]) => void) {

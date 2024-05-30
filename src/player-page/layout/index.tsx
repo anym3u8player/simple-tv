@@ -7,11 +7,20 @@ const AppLayout: React.FC = () => {
 
   useEffect(() => {
     const removeListener = window.playerMessageAPI.onPlayVideo((id) => {
-      console.log('onPlayVideo', id)
       navigate(`/video/${id}`)
     })
     return removeListener
   }, [navigate])
+
+  useEffect(() => {
+    const removeListener = window.playerMessageAPI.onPlaySportLive(
+      (id, type) => {
+        navigate(`/live/${id}/${type}`)
+      }
+    )
+    return removeListener
+  }, [navigate])
+
   return (
     <>
       <Header />

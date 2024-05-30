@@ -4,11 +4,7 @@ type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
   placeholderSrc?: string
 }
 
-export default function LazyImage({
-  placeholderSrc = '/loading.svg',
-  src,
-  ...props
-}: Props) {
+export default function LazyImage({ placeholderSrc = './loading.svg', src, ...props }: Props) {
   const imgRef = useRef<HTMLImageElement>(null!)
 
   useEffect(() => {
@@ -37,7 +33,7 @@ export default function LazyImage({
       onError={(e) => {
         // eslint-disable-next-line no-extra-semi
         ;(e.target as HTMLImageElement).onerror = null
-        ;(e.target as HTMLImageElement).src = '/error.svg'
+        ;(e.target as HTMLImageElement).src = './error.svg'
       }}
     />
   )

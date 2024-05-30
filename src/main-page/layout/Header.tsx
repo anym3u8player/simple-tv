@@ -93,6 +93,9 @@ const Header: React.FC = () => {
               {m.name}
             </NavLink>
           ))}
+          <NavLink to="/live" className="link">
+            体 育
+          </NavLink>
           <NavLink to="/about" className="link">
             关 于
           </NavLink>

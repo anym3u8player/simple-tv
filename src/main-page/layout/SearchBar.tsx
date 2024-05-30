@@ -67,6 +67,7 @@ const SearchBar: React.FC = () => {
     const text = e.target.value
     setKeyword(text)
     if (text !== '') {
+      /* empty */
     }
   }
 
@@ -75,12 +76,12 @@ const SearchBar: React.FC = () => {
       <InputBox
         ref={inputRef}
         value={keyword}
-        placeholder="搜索歌曲、歌手"
+        placeholder="搜索"
         onChange={onKeywordChange}
         onFocus={onFocus}
         onKeyDown={onKeydown}
         onBlur={onBlur}
-        className="w-80"
+        className="w-full max-w-80"
       />
       <div
         className={`absolute border  bg-card overflow-hidden z-50 w-full top-9 transition duration-300 rounded-b-md ${
