@@ -32,6 +32,7 @@ export function create() {
     if (!quit) {
       e.preventDefault()
       win.hide()
+      win.webContents.send('ON_PLAYER_CLOSE')
     }
   })
 

@@ -36,7 +36,7 @@ const VideoPlayer: React.FC = () => {
 
   return (
     <div className="flex items-center h-full overflow-hidden">
-      <div className="grow h-full">
+      <div className="grow h-full flex items-center">
         <Player
           liveUrl={playUrl}
           onTimeUpdate={onTimeUpdate}

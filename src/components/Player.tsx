@@ -8,6 +8,7 @@ interface Props {
   onEnd?: () => void
   onTimeUpdate?: (seek: number) => void
   seek?: number
+  className?: string
 }
 
 let hls: Hls
@@ -18,6 +19,7 @@ const HlsPlayer: React.FC<Props> = ({
   seek,
   onEnd,
   onTimeUpdate,
+  className,
   isLive = false,
 }) => {
   const videoEl = useRef<HTMLVideoElement>(null)
@@ -175,9 +177,16 @@ const HlsPlayer: React.FC<Props> = ({
     }
   }, [onEnd, onTimeUpdate, seek, isLive])
 
-  if (import.meta.env.DEV) {
-    return <div>{liveUrl}</div>
-  }
+  useEffect(() => {
+    const removeListener = window.playerMessageAPI.onPlayClose(() => {
+      videoEl.current?.pause()
+    })
+    return removeListener
+  }, [])
+
+  // if (import.meta.env.DEV) {
+  //   return <div>{liveUrl}</div>
+  // }
 
   return (
     <video
@@ -185,7 +194,7 @@ const HlsPlayer: React.FC<Props> = ({
       controls
       autoPlay
       tabIndex={-1}
-      className="outline-none w-full"
+      className={`outline-none w-full max-h-full ${className}`}
     ></video>
   )
 }

@@ -13,6 +13,7 @@ interface MessageAPI {
   onPlaySportLive: (
     callback: (id: number, type: number) => void
   ) => RemoveListener
+  onPlayClose: (callback: () => void) => RemoveListener
 }
 
 declare global {

@@ -20,4 +20,6 @@ contextBridge.exposeInMainWorld('playerMessageAPI', {
     addListener('ON_PLAY_VIDEO', callback),
   onPlaySportLive: (callback: (id: number, type: number) => void) =>
     addListener('ON_PLAY_SPORT_LIVE', callback),
+  onPlayClose: (callback: () => void) =>
+    addListener('ON_PLAYER_CLOSE', callback),
 })
