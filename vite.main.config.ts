@@ -11,7 +11,7 @@ const NODE_VERSION = 20
 const EXTERNAL = builtinModules
   .map((bm) => `node:${bm}`)
   .concat(builtinModules)
-  .concat('electron')
+  .concat('electron', 'electron/main', 'electron/renderer', 'electron/common')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

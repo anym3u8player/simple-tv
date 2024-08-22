@@ -2,6 +2,7 @@ import { Link, useRouteError } from 'react-router-dom'
 
 export default function ErrorPage() {
   const error = useRouteError() as { statusText: string; message: string }
+
   return (
     <div className="text-center p-10 flex gap-2 flex-col">
       <h1 className="font-semibold text-xl">出错了!</h1>
@@ -17,6 +18,7 @@ export default function ErrorPage() {
           返回首页
         </Link>
       </div>
+      <pre>{JSON.stringify(error, null, 2)}</pre>
       {/* <div>
           <button
             className="default-btn"

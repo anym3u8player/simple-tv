@@ -1,3 +1,4 @@
+import fsp from 'node:fs/promises'
 import { BrowserWindow, app } from 'electron'
 import { loadDevTools } from './dev'
 import {
@@ -10,7 +11,7 @@ import handleIPC from './ipc'
 import log from 'electron-log/main'
 import path from 'node:path'
 import type { LogFile } from 'electron-log'
-import fsp from 'node:fs/promises'
+import './proxy'
 
 log.initialize()
 
@@ -19,7 +20,7 @@ const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
   app.quit()
 } else {
-  app.on('second-instance', (event, commandLine, workingDirectory) => {
+  app.on('second-instance', (_event, _commandLine, _workingDirectory) => {
     // 当运行第二个实例时,将会聚焦到Window这个窗口
     focusMainWindow()
   })
