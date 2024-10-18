@@ -1,6 +1,13 @@
 /// <reference types="vite/client" />
 
-interface IElectronAPI {
+export type Theme = 'system' | 'light' | 'dark'
+
+export interface ElectronAPI {
+  toggleDevtools: () => Promise<void>
+  setPlayerAlwaysOnTop: (alwaysOnTop: boolean) => Promise<void>
+}
+
+export interface IElectronAPI {
   setTheme: (theme: Theme) => Promise<void>
   checkUpdate: () => Promise<string>
   openExternal: (url: string) => Promise<void>
@@ -8,7 +15,7 @@ interface IElectronAPI {
   playVideo: (id: number) => Promise<void>
   playSportLive: (id: number, type: number) => Promise<void>
 }
-interface IVersions {
+export interface IVersions {
   node: string
   chrome: string
   electron: string
@@ -23,8 +30,21 @@ interface IVersions {
     | 'win32'
 }
 
+export type RemoveListener = () => void
+
+export interface MessageAPI {
+  onThemeChange: (callback: () => void) => RemoveListener
+  onPlayVideo: (callback: (id: number) => void) => RemoveListener
+  onPlaySportLive: (
+    callback: (id: number, type: number) => void
+  ) => RemoveListener
+  onPlayClose: (callback: () => void) => RemoveListener
+}
+
 declare global {
   interface Window {
+    playerElectronAPI: ElectronAPI
+    playerMessageAPI: MessageAPI
     electronAPI: IElectronAPI
     versions: IVersions
   }

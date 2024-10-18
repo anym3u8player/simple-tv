@@ -12,7 +12,7 @@ export function uniqueCategory(categoryList: Category[]) {
 }
 
 export function formatUrl(url: string) {
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     return ''
   }
   if (url.startsWith('http://') || url.startsWith('https://')) {
